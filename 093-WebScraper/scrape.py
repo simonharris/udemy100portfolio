@@ -6,23 +6,25 @@ scrape is up to you.
 
 Notes:
 This is, therefore, another step in my over-elaborate ruse to create automated
-Spotify playlists featuring artists active in town over the coming month
-
+Spotify playlists featuring artists active in town over the coming month.
 """
+import csv
+from  pprint import pprint
 import re
 import time
 
 from bs4 import BeautifulSoup
 import requests
 
+
 # Default search order is led by who's playing in town today/this/week/month
 URL_ROOT = 'https://musiclivecolchester.com'
 START_URL = URL_ROOT + '/artists/search?town=colchester'
 
-OUTFILE = 'artists.csv'
+OUTFILE = '093-WebScraper/artists.csv'
 
 SLEEP = 1
-NUM_ARTISTS = 3
+NUM_ARTISTS = 30
 
 
 # TODO: Exception handling
@@ -35,20 +37,24 @@ def parse_artist_page(soup: BeautifulSoup) -> tuple:
     artist = soup.h1.text
 
     # eg https://open.spotify.com/artist/1eHaSUbQG7HYvIOTioukbE
-
     spotify_url = soup.find('a', href=re.compile(r"open.spotify.com/artist"))
 
     if spotify_url:
         spotify_id = spotify_url.get('href').split('/')[-1]
+        print(f" -> got spotify: {spotify_id}")
         return (artist, spotify_id)
+
+
+def write_to_file(contents: list):
+    with open(OUTFILE, 'w', newline='\n') as fh:
+        writer = csv.writer(fh)
+        writer.writerows(contents)
 
 
 def main():
 
     soup = get_page_soup(START_URL)
-
     results = soup.select('div.search-output h5 a')
-
     links = [result.get('href') for result in results]
 
     found = 0
@@ -70,11 +76,12 @@ def main():
         if found >= NUM_ARTISTS:
             break
 
-    print(artists)
+    pprint(artists)
+    write_to_file(artists)
 
 
 # main ------------------------------------------------------------------------
 
+
 if __name__ == '__main__':
     main()
-
