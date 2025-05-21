@@ -41,17 +41,14 @@ class BadTurn(Exception):
 
 
 def game_board() -> list:
-    # TODO: consider eg Pandas
-
-    board = [[EMPTY for _ in  range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
-    return board
+    return [[EMPTY for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
 
 
 def print_board(board):
-    # TODO: prettier printout
     print("\n")
-    pprint(board, width=30)
+    pprint(board, width=20)
     print("\n")
+
 
 def next_player():
     return next(cycler)
@@ -64,17 +61,21 @@ def take_turn(player: str, board: list):
 
     try:
         r, c = [int(ch) for ch in entry.split(' ')]
-    except ValueError:
-        raise BadTurn(BadTurn.GE_SYNTAX)
+    except ValueError as ex:
+        raise BadTurn(BadTurn.GE_SYNTAX) from ex
 
     try:
         if not board[r][c] == EMPTY:
             raise BadTurn(BadTurn.GE_OCCUPIED)
-    except IndexError:
-        raise BadTurn(BadTurn.GE_BADSQUARE)
+    except IndexError as ex:
+        raise BadTurn(BadTurn.GE_BADSQUARE) from ex
 
     board[r][c] = player
     return board
+
+
+def board_full(board):
+    return all(square != EMPTY for row in board for square in row)
 
 
 # main loop -------------------------------------------------------------------
@@ -104,6 +105,12 @@ def main():
 
         # TODO: win detection!
         # TODO: and in fact winner detection
+
+        if board_full(board):
+            print("\nIT'S A DRAW!!")
+            game_over = True
+
+
 
     # TODO: print out some kind of congrats
 
