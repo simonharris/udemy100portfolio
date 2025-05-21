@@ -9,13 +9,16 @@ command line just like the Blackjack game we created on Day 11. It should be a
 import itertools
 from pprint import pprint
 
+from bitboard import player_won
+from config import (
+    BOARD_SIZE,
+    EMPTY,
+    PLAYERS
+)
 
-# config ----------------------------------------------------------------------
 
+# setup  ----------------------------------------------------------------------
 
-BOARD_SIZE = 3
-PLAYERS = ['X', 'O']
-EMPTY = ' '
 
 cycler = itertools.cycle(PLAYERS)
 
@@ -50,11 +53,11 @@ def print_board(board):
     print("\n")
 
 
-def next_player():
+def next_player() -> str:
     return next(cycler)
 
 
-def take_turn(player: str, board: list):
+def take_turn(player: str, board: list) -> list:
 
     print_board(board)
     entry = input(f"Square for player {player}: ")
@@ -74,7 +77,7 @@ def take_turn(player: str, board: list):
     return board
 
 
-def board_full(board):
+def board_full(board: list) -> bool:
     return all(square != EMPTY for row in board for square in row)
 
 
@@ -103,16 +106,17 @@ def main():
             else:
                 turn_ok = True
 
-        # TODO: win detection!
-        # TODO: and in fact winner detection
+        if player_won(board, player):
+            print(f"\nTHE WIN GOES TO {player}!!")
+            game_over = True
 
-        if board_full(board):
+        elif board_full(board):
             print("\nIT'S A DRAW!!")
             game_over = True
 
-
-
-    # TODO: print out some kind of congrats
+    print("GAME OVER!!")
+    print("Final board:")
+    print_board(board)
 
 
 # -----------------------------------------------------------------------------
