@@ -46,7 +46,7 @@ const router = VueRouter.createRouter({
       }
     },
     {
-      path: '/:slug',
+    path: '/:slug',
       component: {
         delimiters: ['[[', ']]'],
         data() {
@@ -56,7 +56,7 @@ const router = VueRouter.createRouter({
         },
         methods: {
             async fetchDetails() {
-                fetch('/api/detail/musiclivecolchester', {
+                fetch('/api/detail/' + this.$route.params.slug, {
                     method: "GET",
                     headers: {
                                 //"X-RapidAPI-Key": 'your-api-key',
@@ -66,7 +66,6 @@ const router = VueRouter.createRouter({
                 .then((response) => {
                     response.json().then((data) => {
                         this.project = data.project;
-                        //console.log(this.project);
                     });
                 })
                 .catch((err) => {
@@ -76,6 +75,14 @@ const router = VueRouter.createRouter({
         },
         mounted() {
             this.fetchDetails();
+        },
+        watch: {
+        '$route.params.slug': {
+            immediate: true,
+            handler(newSlug) {
+            this.fetchDetails();
+            }
+        }
         },
         template: '<div>Project [[ project.name ]]</div>'
       }
