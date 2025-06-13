@@ -1,0 +1,47 @@
+{% include '_page_start.html' %}
+
+
+<div class="row">
+    <h1>Hello, world!</h1>
+    <p>A page about my madcap projects</p>
+</div>
+
+<div class="row">
+
+<div v-for="item in items" class="p-1 col-sm-6 col-md-4 col-lg-3">
+
+    <div class="item-block-in">
+      <a href="/venues/coda-colchester">
+
+      <img src="https://musiclivecolchester.com/uploads/photos/coda_01_Wvhrzsv.jpg" class="img-fluid img-thumbnail mb-2">
+
+
+      <div class="p-2">
+        <h4><a href="/venues/coda-colchester">CODA</a></h4>
+
+        <!-- span class="text-uppercase">Gigs today</span -->
+
+        <p>A website about some things</p>
+        <!-- p><a class="btn btn-secondary" href="/venues/coda-colchester">Venue Details</a></p -->
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+<!-- script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script -->
+<script>
+Vue.createApp({
+    data() {
+    return {
+        items: ['Item 1', 'Item 2', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3']
+    }
+    }
+}).mount('#app')
+</script>
+
+
+
+
+{% include '_page_stop.html' %}
