@@ -25,10 +25,20 @@ class Project(db.Model):
     __tablename__ = 'projects'
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    slug: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     name: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     headline: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     description: Mapped[str] = mapped_column(String(1024), unique=True, nullable=False)
     thumbnail: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
+
+
+    def summary(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'headline': self.headline,
+            'thumbnail': self.thumbnail,
+        }
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -39,11 +49,14 @@ class Project(db.Model):
 #         return db.session.execute(db.select(Cafe).order_by(func.random()).limit(1)).scalar()
 
 
-def get_all_projects():
+def get_all_projects() -> list:
     with app.app_context():
         return db.session.execute(db.select(Project).order_by(Project.name)).scalars().all()
 
 
+def get_project_detail(slug: str) -> dict:
+    with app.app_context():
+        return db.session.execute(db.select(Project).where(Project.slug == slug)).scalar()
 
 
 ## routes ---------------------------------------------------------------------
@@ -57,7 +70,13 @@ def home():
 @app.route('/api/list')
 def api_list():
     projects = get_all_projects()
-    return jsonify(projects=[project.to_dict() for project in projects])
+    return jsonify(projects=[project.summary() for project in projects])
+
+
+@app.route('/api/detail/<slug>')
+def api_detail(slug):
+    project = get_project_detail(slug)
+    return jsonify(projects=project.to_dict())
 
 
 ## main -----------------------------------------------------------------------
