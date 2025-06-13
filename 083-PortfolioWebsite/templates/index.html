@@ -51,10 +51,33 @@ const router = VueRouter.createRouter({
         delimiters: ['[[', ']]'],
         data() {
           return {
-            project_name: 'My Project'
+            project: ''
           }
         },
-        template: '<div>Project [[ project_name ]]</div>'
+        methods: {
+            async fetchDetails() {
+                fetch('/api/detail/musiclivecolchester', {
+                    method: "GET",
+                    headers: {
+                                //"X-RapidAPI-Key": 'your-api-key',
+                                //"X-RapidAPI-Host": 'facts-by-api-ninjas.p.rapidapi.com',
+                    },
+                })
+                .then((response) => {
+                    response.json().then((data) => {
+                        this.project = data.project;
+                        //console.log(this.project);
+                    });
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
+            }
+        },
+        mounted() {
+            this.fetchDetails();
+        },
+        template: '<div>Project [[ project.name ]]</div>'
       }
     }
   ]
@@ -62,18 +85,18 @@ const router = VueRouter.createRouter({
 
 Vue.createApp({
 
-  delimiters: ['[[', ']]'],
+    delimiters: ['[[', ']]'],
 
-  data() {
-    return {
-      projects: []
+    data() {
+        return {
+            projects: []
+        }
+    },
+    mounted() {
+        fetch('/api/list')
+        .then(response => response.json())
+        .then(data => this.projects = data.projects)
     }
-  },
-  mounted() {
-    fetch('/api/list')
-      .then(response => response.json())
-      .then(data => this.projects = data.projects)
-  }
 })
 .use(router)
 .mount('#app')
