@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
+from flask_cors import cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
@@ -8,6 +10,7 @@ from sqlalchemy import Integer, String, Boolean
 
 
 app = Flask(__name__)
+CORS(app)
 
 # Connect to Database
 class Base(DeclarativeBase):
