@@ -8,40 +8,76 @@
 
 <div class="row">
 
-<div v-for="item in items" class="p-1 col-sm-6 col-md-4 col-lg-3">
+<div v-for="project in projects" class="p-1 col-sm-6 col-md-4 col-lg-3">
 
     <div class="item-block-in">
-      <a href="/venues/coda-colchester">
-
-      <img src="https://musiclivecolchester.com/uploads/photos/coda_01_Wvhrzsv.jpg" class="img-fluid img-thumbnail mb-2">
-
+      <a :href="project.slug">
+      <img :src="'static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
+      </a>
 
       <div class="p-2">
-        <h4><a href="/venues/coda-colchester">CODA</a></h4>
+        <h4>
+            <!-- a :href="project.slug">[[ project.name ]]</a -->
+            <router-link :to="'/' + project.slug">[[ project.name ]]</router-link>
+
+        </h4>
 
         <!-- span class="text-uppercase">Gigs today</span -->
 
-        <p>A website about some things</p>
+        <p>[[ project.headline ]]</p>
         <!-- p><a class="btn btn-secondary" href="/venues/coda-colchester">Venue Details</a></p -->
       </div>
     </div>
 </div>
 
 </div>
-
+<router-view></router-view>
 
 <!-- script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script -->
 <script>
+// Create a router instance
+const router = VueRouter.createRouter({
+  history: VueRouter.createWebHistory(),
+  routes: [
+    {
+      path: '/',
+      component: {
+        template: '<div>Home</div>'
+      }
+    },
+    {
+      path: '/:slug',
+      component: {
+        delimiters: ['[[', ']]'],
+        data() {
+          return {
+            project_name: 'My Project'
+          }
+        },
+        template: '<div>Project [[ project_name ]]</div>'
+      }
+    }
+  ]
+})
+
 Vue.createApp({
-    data() {
+
+  delimiters: ['[[', ']]'],
+
+  data() {
     return {
-        items: ['Item 1', 'Item 2', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3', 'Item 3']
+      projects: []
     }
-    }
-}).mount('#app')
+  },
+  mounted() {
+    fetch('/api/list')
+      .then(response => response.json())
+      .then(data => this.projects = data.projects)
+  }
+})
+.use(router)
+.mount('#app')
 </script>
-
-
 
 
 {% include '_page_stop.html' %}

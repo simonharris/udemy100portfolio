@@ -33,11 +33,18 @@ class Project(db.Model):
 
 
     def summary(self):
+
+        if self.thumbnail:
+            thumbnail = self.thumbnail
+        else:
+            thumbnail = 'placeholder.webp'
+
         return {
             'id': self.id,
+            'slug': self.slug,
             'name': self.name,
             'headline': self.headline,
-            'thumbnail': self.thumbnail,
+            'thumbnail': thumbnail,
         }
 
     def to_dict(self):
@@ -76,7 +83,7 @@ def api_list():
 @app.route('/api/detail/<slug>')
 def api_detail(slug):
     project = get_project_detail(slug)
-    return jsonify(projects=project.to_dict())
+    return jsonify(project=project.to_dict())
 
 
 ## main -----------------------------------------------------------------------
