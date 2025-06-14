@@ -38,38 +38,24 @@ export default {
     }
   },
   methods: {
-    async fetchDetails(slug) {
-        fetch('http://127.0.0.1:5000/api/detail/' + slug, {
-            method: "GET",
-            headers: {},
-        })
-        .then((response) => {
-            response.json().then((data) => {
-                this.project = data.project;
-                console.log(this.project.name);
-            });
-        })
-        .catch((err) => {
-            console.error(err);
-        })
-    }
+    // ...
   },
   mounted() {
         fetch('http://127.0.0.1:5000/api/list')
         .then(response => response.json())
         .then(data => this.projects = data.projects)
   },
-  watch: {
-    $route: {
-      handler(to, from) {
-        console.log("Route now changed to:", to.params.slug);
-        if (to.params.slug != undefined) {
-          this.fetchDetails(to.params.slug);
-        }
-      },
-      immediate: true
-    }
-  }
+  // watch: {
+  //   $route: {
+  //     handler(to, from) {
+  //       console.log("Route now changed to:", to.params.slug);
+  //       if (to.params.slug != undefined) {
+  //         this.fetchDetails(to.params.slug);
+  //       }
+  //     },
+  //     immediate: true
+  //   }
+  // }
 }
 </script>
 
