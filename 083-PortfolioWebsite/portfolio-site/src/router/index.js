@@ -11,9 +11,16 @@ const router = createRouter({
       },
     },
     {
-      path: '/hello',
+      path: '/:slug',
       component: {
-        render: () => h('div', 'Hello!'),
+        data() {
+          return {
+            project: { name: 'My Project' },
+          };
+        },
+        render() {
+          return h('div', 'Hello! ' + this.project.name);
+        },
       },
     },
   ],

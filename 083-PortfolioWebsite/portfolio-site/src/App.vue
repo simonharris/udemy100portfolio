@@ -3,14 +3,27 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-<div class="container-fluid">
-    <div class="container-lg" id="app">
-
+  <div class="row">
     <h1><router-link to="/">Simon's Page</router-link></h1>
+  </div>
 
-    <p><router-link to="/hello">Go to Hello</router-link></p>
 
+<div class="row">
+<div v-for="project in projects" class="p-1 col-sm-6 col-md-4 col-lg-3">
+
+    <div class="item-block-in">
+      <router-link :to="'/' + project.slug">
+      <img :src="'http://127.0.0.1:5000/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
+      </router-link>
+
+      <div class="p-2">
+        <h4>
+            <router-link :to="'/' + project.slug">{{ project.name }}</router-link>
+        </h4>
+        <p>{{  project.headline }}</p>
+      </div>
     </div>
+</div>
 </div>
 
   <RouterView />
@@ -21,23 +34,41 @@ import { RouterLink, RouterView } from 'vue-router'
 export default {
   data() {
     return {
-      // your data here
-    }
-  },
-  mounted() {
-    console.log('Component mounted3!')
-  },
-  watch: {
-    $route(to, from) {
-      if (to.path === '/hello') {
-        // Do your cool stuff here
-        console.log("Route changed to /hello");
-        // Add your extra cool stuff logic here
-      }
+      projects: []
     }
   },
   methods: {
-    // your methods here
+    async fetchDetails(slug) {
+        fetch('http://127.0.0.1:5000/api/detail/' + slug, {
+            method: "GET",
+            headers: {},
+        })
+        .then((response) => {
+            response.json().then((data) => {
+                this.project = data.project;
+                console.log(this.project.name);
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+    }
+  },
+  mounted() {
+        fetch('http://127.0.0.1:5000/api/list')
+        .then(response => response.json())
+        .then(data => this.projects = data.projects)
+  },
+  watch: {
+    $route: {
+      handler(to, from) {
+        console.log("Route now changed to:", to.params.slug);
+        if (to.params.slug != undefined) {
+          this.fetchDetails(to.params.slug);
+        }
+      },
+      immediate: true
+    }
   }
 }
 </script>
