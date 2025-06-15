@@ -1,10 +1,14 @@
+<script setup>
+import { API_HOST } from '@/config';
+</script>
+
 <template>
 
 <div class="row">
     <div v-for="project in projects" class="p-1 col-sm-6 col-md-4 col-lg-3">
         <div class="position-relative">
             <router-link :to="'/' + project.slug">
-            <img :src="'http://127.0.0.1:5000/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
+            <img :src="API_HOST + '/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
             </router-link>
 
             <div class="position-absolute bottom-0 start-0 bg-secondary w-100 p-2" style="--bs-bg-opacity: .8">
@@ -25,14 +29,14 @@
 export default {
     data() {
         return {
-        projects: []
+            projects: []
         }
     },
     methods: {
         // ...
     },
     mounted() {
-            fetch('http://127.0.0.1:5000/api/list')
+            fetch(API_HOST + '/api/list')
             .then(response => response.json())
             .then(data => this.projects = data.projects)
     },

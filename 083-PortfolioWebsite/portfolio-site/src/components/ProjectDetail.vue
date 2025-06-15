@@ -1,5 +1,6 @@
 <script setup>
 import { h } from 'vue';
+import { API_HOST } from '@/config';
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import { h } from 'vue';
     <h4>HELLO PROJECT {{  project.name  }}</h4>
 
     <div class="col-lg-4">
-        <img :src="'http://127.0.0.1:5000/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
+        <img :src="API_HOST + '/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
     </div>
 
     <div class="col-lg-8">
@@ -31,7 +32,7 @@ export default {
     },
     methods: {
         async fetchDetails(slug) {
-        fetch('http://127.0.0.1:5000/api/detail/' + slug, {
+        fetch(API_HOST + '/api/detail/' + slug, {
             method: "GET",
             headers: {},
         })
