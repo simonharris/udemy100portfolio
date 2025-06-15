@@ -15,9 +15,11 @@ import CommonFooter from './components/CommonFooter.vue'
 </div>
 
 <div class="container-lg">
-  <transition name="fade" mode="out-in">
-    <RouterView />
-  </transition>
+<router-view v-slot="{ Component }">
+    <Transition name="myfade">
+      <component :is="Component" />
+    </Transition>
+ </router-view>
 </div>
 
 <CommonFooter />
@@ -26,13 +28,14 @@ import CommonFooter from './components/CommonFooter.vue'
 
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.myfade-enter-active {
+  transition: all 0.3s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.myfade-enter-from,
+.myfade-leave-to {
+  /* transform: translateX(-10px); */
   opacity: 0;
 }
 </style>
+
