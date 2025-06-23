@@ -1,35 +1,54 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import CommonFooter from './components/CommonFooter.vue'
+import { RouterView } from 'vue-router'
+import { reactive } from 'vue'
+import PageHeader from '@/components/PageHeader.vue'
+import PageFooter from '@/components/PageFooter.vue'
 </script>
 
 <template>
 
-<div class="container-fluid item-block-in">
-  <div class="container-lg">
-    <div class="row pt-4">
-      <h1 class="display-2"><router-link to="/">Simon's Page</router-link></h1>
-      <p class="lead">Some placeholder text and maybe a link or two</p>
-    </div>
-  </div>
-</div>
+<PageHeader :config="pageConfig" />
 
 <div class="container-lg">
+
 <router-view v-slot="{ Component }">
-    <Transition name="myfade">
-      <component :is="Component" />
+    <Transition name="myfade" >
+      <component :is="Component" :config="pageConfig"  @update-config="updateConfig" />
     </Transition>
- </router-view>
+</router-view>
+
+
 </div>
 
-<CommonFooter />
+<PageFooter />
 
 </template>
 
 
+<script>
+
+export default {
+  data() {
+    return {
+      pageConfig: {
+        title: 'Default title',
+        headline: 'Default headline'
+      }
+    }
+  },
+  methods: {
+    updateConfig(newConfig) {
+      this.pageConfig = newConfig;
+    }
+  }
+}
+
+</script>
+
+
 <style scoped>
 .myfade-enter-active {
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .myfade-enter-from,
@@ -37,5 +56,5 @@ import CommonFooter from './components/CommonFooter.vue'
   /* transform: translateX(-10px); */
   opacity: 0;
 }
-</style>
 
+</style>

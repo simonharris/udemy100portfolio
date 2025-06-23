@@ -1,26 +1,22 @@
 <script setup>
-import { h } from 'vue';
 import { API_HOST } from '@/config';
+import PageHeader from '@/components/PageHeader.vue'
 </script>
 
 <template>
 
 <div class="row">
-    <h4>HELLO PROJECT {{  project.name  }}</h4>
 
-    <div class="col-lg-4">
+    <div class="col-md-4">
         <img :src="API_HOST + '/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
     </div>
 
-    <div class="col-lg-8">
-        <p class="lead">{{ project.headline }}</p>
-        <p>{{ project.description }}</p>
+    <div class="col-md-8">
+        <p v-html="project.description"></p>
     </div>
-
 </div>
 
 </template>
-
 
 <script>
 
@@ -28,23 +24,34 @@ export default {
     data() {
         return {
             project: { name: 'Project Placeholder' },
+            isThumbnailExpanded: false,
         };
+    },
+    props: {
+        config: Object,
+    },
+    computed: {
+        // ...
     },
     methods: {
         async fetchDetails(slug) {
-        fetch(API_HOST + '/api/detail/' + slug, {
-            method: "GET",
-            headers: {},
-        })
-        .then((response) => {
-            response.json().then((data) => {
-                this.project = data.project;
-            });
-        })
-        .catch((err) => {
-            console.error(err);
-        })
-        }
+            fetch(API_HOST + '/api/detail/' + slug, {
+                method: "GET",
+                headers: {},
+            })
+            .then((response) => {
+                response.json().then((data) => {
+                    this.project = data.project;
+                    this.$emit('update-config', {
+                        title: data.project.name,
+                        headline: data.project.headline
+                    });
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+        },
     },
     watch: {
         $route: {
@@ -59,3 +66,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+/* .img-thumbnail {
+  cursor: pointer;
+} */
+
+</style>

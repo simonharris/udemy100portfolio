@@ -1,18 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
+
 
 body {
-  font-family: 'Playfair Display', serif;
+  /* font-family: 'Playfair Display', serif; */
+  font-family: 'Roboto'; /* , helvetica, arial, sans-serif; */
+  background-color: #708090;
+  color: white;
+}
+
+h1, p.lead {
+  font-weight: 100;
 }
 
 h1 a{
   text-decoration: none !important;
+  color: white !important;
 }
 
 a {
-  color: #555555;
+  color: #cacaca;
+  text-decoration: none;
 }
 
-.item-block-in {
-  background-color: #f6f6f6;
-  margin-bottom: 0.6em;
+a:hover {
+  text-decoration: underline;
 }
+
+.h-overlay {
+  height: 33%;
+  --bs-bg-opacity: .8;
+}
+
+.magenta { background-color: magenta; }
+.yellow { background-color: yellow; }
+.cyan { background-color: cyan; }
+
+/*
+ body {
+  background-color: #708090;
+  text-align: center;
+  margin-top: 12px;
+}
+
+a {
+  color: #cacaca;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#content{
+  font-family: arial, helvetica, sans-serif;
+  font-size: 11px;
+  color: #ffffff;
+}*/
