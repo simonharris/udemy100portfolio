@@ -1,5 +1,5 @@
 # Define variables
-VUE_DIR = portfolio-site
+VUE_DIR = site
 STATIC_DIR = static/portfolio-site
 
 # Build Vue app and copy static files to Flask project
@@ -8,5 +8,6 @@ build:
 	mkdir -p $(STATIC_DIR)
 	cp -r $(VUE_DIR)/dist/* $(STATIC_DIR)/
 
-server:
+.PHONY: web
+web:
 	cd $(VUE_DIR) && npm run dev -- --host 0.0.0.0

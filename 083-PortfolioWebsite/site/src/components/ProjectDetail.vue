@@ -12,6 +12,10 @@ import PageHeader from '@/components/PageHeader.vue'
     </div>
 
     <div class="col-md-8">
+
+        <div v-if="project.url"><a :href="project.url" target="_blank">Visit Project</a></div>
+
+
         <p v-html="project.description"></p>
     </div>
 </div>

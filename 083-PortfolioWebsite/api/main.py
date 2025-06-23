@@ -33,6 +33,9 @@ class Project(db.Model):
     headline: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     description: Mapped[str] = mapped_column(String(1024), unique=True, nullable=False)
     thumbnail: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
+    url: Mapped[str] = mapped_column(String(64))
+    status: Mapped[int] = mapped_column(Integer)
+    order: Mapped[int] = mapped_column(Integer)
 
 
     def summary(self):
@@ -61,7 +64,7 @@ class Project(db.Model):
 
 def get_all_projects() -> list:
     with app.app_context():
-        return db.session.execute(db.select(Project).order_by(Project.name)).scalars().all()
+        return db.session.execute(db.select(Project).where(Project.status == 1).order_by(Project.order)).scalars().all()
 
 
 def get_project_detail(slug: str) -> dict:
