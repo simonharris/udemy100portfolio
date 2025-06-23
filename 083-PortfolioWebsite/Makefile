@@ -9,4 +9,4 @@ build:
 	cp -r $(VUE_DIR)/dist/* $(STATIC_DIR)/
 
 server:
-	cd $(VUE_DIR) && npm run dev
+	cd $(VUE_DIR) && npm run dev -- --host 0.0.0.0
