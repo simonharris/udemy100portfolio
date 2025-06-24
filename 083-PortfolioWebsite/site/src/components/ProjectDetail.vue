@@ -1,6 +1,5 @@
 <script setup>
 import { API_HOST } from '@/config';
-import PageHeader from '@/components/PageHeader.vue'
 </script>
 
 <template>
@@ -12,11 +11,11 @@ import PageHeader from '@/components/PageHeader.vue'
     </div>
 
     <div class="col-md-8">
-
-        <div v-if="project.url"><a :href="project.url" target="_blank">Visit Project</a></div>
-
-
+        <p class="breadcrumb"><router-link :to="'/'">Projects</router-link>&nbsp;&raquo; {{ project.name }}</p>
         <p v-html="project.description"></p>
+        <p v-if="project.url" class="btn-visit">
+            <a :href="project.url" class="btn btn-light text-secondary " role="button">Visit Project</a>
+        </p>
     </div>
 </div>
 

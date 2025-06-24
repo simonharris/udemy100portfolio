@@ -36,24 +36,12 @@ a:hover {
 .yellow { background-color: yellow; }
 .cyan { background-color: cyan; }
 
-/*
- body {
-  background-color: #708090;
-  text-align: center;
-  margin-top: 12px;
+p.breadcrumb, .btn-visit {
+  font-variant: small-caps;
+  font-weight: bold;
+  letter-spacing: 0.05em;
 }
 
-a {
-  color: #cacaca;
+.btn-visit a:hover {
   text-decoration: none;
 }
-
-a:hover {
-  text-decoration: underline;
-}
-
-#content{
-  font-family: arial, helvetica, sans-serif;
-  font-size: 11px;
-  color: #ffffff;
-}*/
