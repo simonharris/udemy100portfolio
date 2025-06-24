@@ -1,6 +1,5 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-from flask_cors import cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
@@ -34,7 +33,7 @@ class Project(db.Model):
     description: Mapped[str] = mapped_column(String(1024), unique=True, nullable=False)
     thumbnail: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
     url: Mapped[str] = mapped_column(String(64))
-    status: Mapped[int] = mapped_column(Integer)
+    status: Mapped[Boolean] = mapped_column(Integer)
     order: Mapped[int] = mapped_column(Integer)
 
 
@@ -57,11 +56,6 @@ class Project(db.Model):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
-# def get_random_cafe():
-#     with app.app_context():
-#         return db.session.execute(db.select(Cafe).order_by(func.random()).limit(1)).scalar()
-
-
 def get_all_projects() -> list:
     with app.app_context():
         return db.session.execute(db.select(Project).where(Project.status == 1).order_by(Project.order)).scalars().all()
@@ -73,11 +67,6 @@ def get_project_detail(slug: str) -> dict:
 
 
 ## routes ---------------------------------------------------------------------
-
-
-@app.route('/')
-def home():
-    return render_template('index.html') #, all_posts=posts)
 
 
 @app.route('/api/list')
