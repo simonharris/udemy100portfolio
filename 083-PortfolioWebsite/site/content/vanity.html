@@ -1,6 +1,23 @@
 
+<p>
+    As the name suggests, django-vanityurls was originally designed to support vanity URLs---short,
+     memorable routes to content deeper within your site, but it has
+     proven to be more generally applicable to any internal redirects.</p>
+
+<p> It's a Django middleware that jumps in after routing has happened, and
+    only does its stuff if routing generates a 404. If the requested URL is in
+    the database, it issues the redirect with the HTTP response code of your choice.</p>
+
+<p>You can install it via <code>pip install vanity-urls</code>, and everything you need is online:</p>
+
 <ul>
-    <li>https://github.com/simonharris/safecracker.pl/</li>
-    <li>https://pypi.org/project/django-vanityurls/</li>
-    <li>https://django-vanityurls.readthedocs.io/</li>
+    <li><a href="https://github.com/simonharris/django-vanityurls/">Source code on Github</a></li>
+    <li><a href="https://pypi.org/project/django-vanityurls/">Official project page on PyPI</a></li>
+    <li><a href="https://django-vanityurls.readthedocs.io/">Documentation on Read the Docs</a></li>
 </ul>
+
+
+<p>It's only a tiny project, but I've found it useful, and it's in use behind
+     <a href="/musiclivecolchester">Music Live COLCHESTER</a>. As a smaller project
+     I've taken the opportunity to be a bit relentless with the professional practices, so for example
+     there is 100% test coverage, and the code lints to 10/10.</p>
