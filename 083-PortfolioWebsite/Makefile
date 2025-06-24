@@ -11,3 +11,7 @@ build:
 .PHONY: web
 web:
 	cd $(VUE_DIR) && npm run dev -- --host 0.0.0.0
+
+dbadmin:
+	sqlite_web instance/projects.db
+
