@@ -1,1 +1,25 @@
-https://github.com/simonharris/safecracker.pl
+
+<p>Safe Cracker is a numeric logic puzzle published in one of the Sunday papers here in the UK. It's
+    kind of fun to tackle, and after solving it on paper a bunch of times, I got
+    into programming the solutions in Prolog, because why not.</p>
+
+    <p>Things kind of escalated from there, and now <a href="https://safe.pointbeing.net/">the system</a>
+         can solve the puzzle just from a cameraphone photograph of the puzzle's English description.
+         It's a whole Rube Goldberg-like contraption comprising three subsystems:</p>
+
+     <ul>
+        <li>A Natural Language Processing and logical reasoning engine written in Prolog,
+            which parses the puzzle text using a Definite Clause Grammar, and converts the
+            clues into <a href="https://www.swi-prolog.org/man/clpfd.html">CLP(FD)</a> constraints</li>
+        <li>A back-end system built on the <a href="https://flask.palletsprojects.com/en/stable/">Flask</a> framework in Python, which
+            performs the Optical Character Recognition, interfaces with Prolog, and exposes a streaming HTTP API</li>
+        <li>A responsive, interactive front-end JavaScript web app build with <a href="https://vuejs.org/">Vue.js</a></li>
+      </ul>
+
+<p>All the code is open source and available via the
+    <a href="https://github.com/simonharris/safecracker.pl"</a>safecracker.pl repository</a>
+    on Github, and there's a longer discussion of the project on the site's
+     <a href="https://safe.pointbeing.net/about">about Safe Cracker</a> page.
+     If you don't have a copy of the specific paper to hand, there are
+    <a href="https://safe.pointbeing.net/examples">a few example puzzles</a>
+    stored within the site, so you can watch it work.</p>
