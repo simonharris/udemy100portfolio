@@ -2,3 +2,4 @@ Flask
 flask_sqlalchemy
 SQLAlchemy
 sqlite-web
+flask_cors
