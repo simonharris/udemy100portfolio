@@ -28,7 +28,7 @@ a:hover {
 }
 
 .h-overlay {
-  height: 33%;
+  height: 35%;
   --bs-bg-opacity: .8;
 }
 
@@ -44,4 +44,8 @@ p.breadcrumb, .btn-visit {
 
 .btn-visit a:hover {
   text-decoration: none;
+}
+
+code {
+  color: inherit; /* or any other color you prefer */
 }

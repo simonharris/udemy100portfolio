@@ -7,7 +7,9 @@ import { API_HOST } from '@/config';
 <div class="row">
 
     <div class="col-md-4">
-        <img :src="API_HOST + '/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
+        <a :href="project.url" target="_blank">
+            <img :src="API_HOST + '/static/thumbs/' + project.thumbnail" class="img-fluid img-thumbnail mb-2">
+        </a>
     </div>
 
     <div class="col-md-8">

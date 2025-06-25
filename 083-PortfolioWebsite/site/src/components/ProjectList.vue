@@ -13,9 +13,9 @@ import { API_HOST } from '@/config';
 
             <div class="position-absolute bottom-0 start-0 bg-secondary w-100 h-overlay p-2">
                 <h4 class="fs-6">
-                    <router-link style="color: white; text-decoration: none;"   :to="'/' + project.slug">{{ project.name }}</router-link>
+                    <router-link style="color: white" :to="'/' + project.slug">{{ project.name }}</router-link>
                 </h4>
-                <p class="fs-6">{{  project.headline }}</p>
+                <p>{{  project.headline }}</p>
             </div>
         </div>
     </div>
