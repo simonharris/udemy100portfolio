@@ -15,3 +15,6 @@ web:
 dbadmin:
 	sqlite_web instance/projects.db
 
+sync:
+	#rsync -r /home/simon/project_git/udemy100portfolio/083-PortfolioWebsite/ .
+	rsync -r . /var/www/sites/prod/projects/ 
