@@ -5,6 +5,9 @@ The assignments are:
 ### [Day 82: Text to Morse Code Converter](082-MorseEncoder)
 A text-based, command line program that takes a string input and converts it into Morse Code.
 
+### [Day 83: Portfolio Website](083-PortfolioWebsite)
+This assignment mainly referred back to a lesson about web design. I'm not a designer, so I subverted it into a vanity project talking about all my other harebrained projects. It's built using Flask, Vue.js and Bootstrap, and you can visit it at [projects.pointbeing.net](https://projects.pointbeing.net/).
+
 ### [Day 84: Tic Tac Toe](083-TicTacToe)
 A text-based, command line version of the Tic Tac Toe game. My implementation detects the win using bitboards, which is a nice declarative solution that avoids convoluted looping.
 
