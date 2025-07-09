@@ -10,6 +10,7 @@ Spotify playlists featuring artists active in town over the coming month.
 """
 import csv
 from  pprint import pprint
+import random
 import re
 import time
 
@@ -21,7 +22,7 @@ import requests
 URL_ROOT = 'https://musiclivecolchester.com'
 START_URL = URL_ROOT + '/artists/search?town=colchester'
 
-OUTFILE = '093-WebScraper/artists.csv'
+OUTFILE = 'artists.csv'
 
 SLEEP = 1
 NUM_ARTISTS = 30
@@ -76,6 +77,7 @@ def main():
         if found >= NUM_ARTISTS:
             break
 
+    random.shuffle(artists)
     pprint(artists)
     write_to_file(artists)
 
