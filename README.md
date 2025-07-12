@@ -13,3 +13,6 @@ A text-based, command line version of the Tic Tac Toe game. My implementation de
 
 ### [Day 93: Custom Web Scraper](093-WebScraper)
 I use this IRL to scrape my own site ([musiclivecolchester.com](https://musiclivecolchester.com/)), thereby using existing data and algorithms as a starting point for generating the monthly [MusicLiveCOLCHESTER BUZZ](https://open.spotify.com/playlist/3x3h7qglnsP47QFxC4pgHg?si=6a5254c53b2047c0) Spotify playlists.
+
+### [Day 98: Custom Automation](093-CustomeAutomation)
+Some monitoring scripts for some of my sites and services, using Selenium/WebDriver and Pytest.
