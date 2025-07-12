@@ -34,7 +34,7 @@ export default {
             projects: [],
             pageConfig: {
                 'title': "Simon's Projects",
-                'headline': "I'll find something to put here",
+                'headline': "I'll make something to put here",
             }
         }
     },

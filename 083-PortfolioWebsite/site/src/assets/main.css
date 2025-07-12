@@ -49,3 +49,9 @@ p.breadcrumb, .btn-visit {
 code {
   color: inherit; /* or any other color you prefer */
 }
+
+.pink { background-color: pink }
+.yellow { background-color: yellow }
+.green { background-color: green }
+
+
