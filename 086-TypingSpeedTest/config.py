@@ -19,3 +19,8 @@ ENTRY = {
     'height': 6,
     'width': 60,
 }
+
+TIMER = {
+    'font_name': 'helvetica',
+    'font_size': 20,
+}
