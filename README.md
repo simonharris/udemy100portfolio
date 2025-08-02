@@ -1,6 +1,6 @@
 My attempts at the portfolio exercises from the App Brewery's "100 Days of Code: The Complete Python Pro Bootcamp" course, available via Udemy.
 
-The assignments are:
+The assignments tackled so far are:
 
 ### [Day 82: Text to Morse Code Converter](082-MorseEncoder)
 A text-based, command line program that takes a string input and converts it into Morse Code.
