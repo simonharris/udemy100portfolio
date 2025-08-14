@@ -31,7 +31,16 @@ def init_text():
 
 
 def endgame():
-    global running
+
+    text = text_typed.get('1.0', 'end-1c')
+    word_count = len(text.split())
+
+    secs = G['time_allowed'] - time_left.get()
+    wpm = (word_count / secs) * 60
+
+    label_result.config(text=f"{word_count} words in {secs} seconds = {wpm:.0f} words per minute")
+
+
 
     print('GAME OVER LOL')
 
@@ -179,6 +188,9 @@ label_time_unit = tk.Label(window,
                     )
 label_time_unit.grid(row=6, columnspan=12)
 
+
+label_result = tk.Label(window, text='')
+label_result.grid(row=7, columnspan=12)
 
 
 # game in progress? must be called after window and text_typed created
