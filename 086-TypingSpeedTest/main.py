@@ -40,10 +40,7 @@ def endgame():
 
     label_result.config(text=f"{word_count} words in {secs} seconds = {wpm:.0f} words per minute")
 
-
-
     print('GAME OVER LOL')
-
 
 
 def start_timer():
@@ -78,6 +75,7 @@ def click_start():
     button_start.config(state=tk.DISABLED)
     button_pause.config(state=tk.NORMAL)
     button_stop.config(state=tk.NORMAL)
+    label_result.config(text='')
     start_timer()
 
 
@@ -124,6 +122,7 @@ window.geometry(W['geometry'])
 # timer stuff
 time_left = tk.IntVar()
 time_left.set(G['time_allowed'])
+time_left.trace_add('write', lambda *args: click_stop() if time_left.get() <= 0 else None)
 
 # the settings panel
 frame_settings = tk.Frame(window, background='magenta')
