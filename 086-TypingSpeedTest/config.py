@@ -1,7 +1,7 @@
 
 
 WINDOW = {
-    'geometry': '800x800',
+    'geometry': '613x340',
     'padx': 5,
     'pady': 5,
     'title': "Typing Speed Test",
