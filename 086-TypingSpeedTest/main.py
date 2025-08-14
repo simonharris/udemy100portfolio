@@ -1,3 +1,4 @@
+from pprint import pprint
 import tkinter as tk
 
 from faker import Faker
@@ -47,7 +48,7 @@ def start_timer():
 def decrement_timer():
     global time_left
 
-    if running:
+    if running.get():
         # wait 1 sec
         window.after(1000, decrement_timer)
 
@@ -61,7 +62,7 @@ def decrement_timer():
 def click_start():
     global running
 
-    running = True
+    running.set(True)
 
     init_text()
     text_typed.focus_force()
@@ -75,12 +76,12 @@ def click_start():
 def click_pause():
     global running
 
-    if running:
+    if running.get():
         button_pause.config(text='Unpause')
-        running = False
+        running.set(False)
     else:
         button_pause.config(text='Pause')
-        running = True
+        running.set(True)
         decrement_timer()
 
 
@@ -90,16 +91,19 @@ def click_stop():
     button_start.config(state=tk.NORMAL)
     button_pause.config(state=tk.DISABLED, text='Pause')
     button_stop.config(state=tk.DISABLED)
-    running = False
+    running.set(False)
     endgame()
 
 
+def toggle_running(*args):
+    print(f"Running is now: {running.get()}")
+    if running.get():
+        text_typed.config(state=tk.NORMAL)
+    else:
+        text_typed.config(state=tk.DISABLED)
+
+
 # UI setup --------------------------------------------------------------------
-
-
-# init state
-running = False
-
 
 
 # window
@@ -112,11 +116,9 @@ window.geometry(W['geometry'])
 time_left = tk.IntVar()
 time_left.set(G['time_allowed'])
 
-
 # the settings panel
 frame_settings = tk.Frame(window, background='magenta')
 frame_settings.grid(row=1, column=0, columnspan=12)
-
 
 # the row of buttons
 frame_buttons = tk.Frame(window, background='white')
@@ -162,7 +164,7 @@ text_typed.grid(column=1, row=3, columnspan=10)
 text_typed.config(foreground="black")
 text_typed.insert(tk.END, "")
 text_typed.config(insertbackground='black')
-text_typed.config(state=tk.NORMAL)
+#text_typed.config(state=tk.NORMAL)
 
 
 # the timer
@@ -176,6 +178,13 @@ label_time_unit = tk.Label(window,
                       font=(T['font_name'], 12)
                     )
 label_time_unit.grid(row=6, columnspan=12)
+
+
+
+# game in progress? must be called after window and text_typed created
+running = tk.BooleanVar()
+running.trace_add('write', toggle_running)
+running.set(False)
 
 
 window.mainloop()
