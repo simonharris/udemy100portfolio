@@ -33,24 +33,26 @@ def endgame():
     global running
 
     print('GAME OVER LOL')
-    running = False
+
 
 
 def start_timer():
+    global time_left
+
     print("starting timer")
-    # populate label, maybe
-    # ...
+    time_left.set(G['time_allowed'] + 1)
     decrement_timer()
 
 
 def decrement_timer():
     global time_left
 
-    # wait 1 sec
-    window.after(1000, decrement_timer)
+    if running:
+        # wait 1 sec
+        window.after(1000, decrement_timer)
 
-    # decrement var
-    time_left.set(time_left.get() - 1)
+        # decrement var
+        time_left.set(time_left.get() - 1)
 
 
 # event handlers --------------------------------------------------------------
@@ -59,13 +61,15 @@ def decrement_timer():
 def click_start():
     global running
 
+    running = True
+
     init_text()
     text_typed.focus_force()
     button_start.config(state=tk.DISABLED)
     button_pause.config(state=tk.NORMAL)
     button_stop.config(state=tk.NORMAL)
     start_timer()
-    running = True
+
 
 
 def click_pause():
@@ -77,12 +81,16 @@ def click_pause():
     else:
         button_pause.config(text='Pause')
         running = True
+        decrement_timer()
 
 
 def click_stop():
+    global running
+
     button_start.config(state=tk.NORMAL)
     button_pause.config(state=tk.DISABLED, text='Pause')
     button_stop.config(state=tk.DISABLED)
+    running = False
     endgame()
 
 
