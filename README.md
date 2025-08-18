@@ -11,6 +11,9 @@ This assignment mainly referred back to a lesson about web design. I'm not a des
 ### [Day 84: Tic Tac Toe](083-TicTacToe)
 A text-based, command line version of the Tic Tac Toe game. My implementation detects the win using bitboards, which is a nice declarative solution that avoids convoluted looping.
 
+### [Day 86: Typing Speed Test](086-TypingSpeedTest)
+A Tkinter GUI to test your typing speed. It's not exactly feature-rich, but it works, and I may return to it one day.
+
 ### [Day 93: Custom Web Scraper](093-WebScraper)
 I use this IRL to scrape my own site ([musiclivecolchester.com](https://musiclivecolchester.com/)), thereby using existing data and algorithms as a starting point for generating the monthly [MusicLiveCOLCHESTER BUZZ](https://musiclivecolchester.com/artists/playlists) Spotify playlists.
 
